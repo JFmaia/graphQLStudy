@@ -1,27 +1,42 @@
 import { ApolloServer, gql } from 'apollo-server';
-
+//Type content complexos
 const server = new ApolloServer({
   typeDefs: gql`
     type Query {
-      id: ID
-      name: String
-      age: Int
-      heigth: Float
-      married: Boolean!
-      arrayString: [String!]!
+      user: User!
+      users: [User!]!
+    }
+
+    type User {
+      id: ID!
+      userName: String
     }
   `,
   // o ! na frente do type não deixa ser null e ele tem que existir
   resolvers: {
     Query: {
-      id: () => '131iswjd2321',
-      name: () => {
-        return 'José Maia';
+      user: () => {
+        return {
+          id: 'sfdhusfus',
+          userName: 'José Flavio',
+        };
       },
-      age: () => 23,
-      heigth: () => 86.33,
-      married: () => false,
-      arrayString: () => ['Pikles', 'Repolho'],
+      users: () => {
+        return [
+          {
+            id: 'sfdhusfus',
+            userName: 'José Flavio',
+          },
+          {
+            id: 'wser42423',
+            userName: 'Matheus Dantas',
+          },
+          {
+            id: 'wer324wdsrfwe',
+            userName: 'José Maia',
+          },
+        ];
+      },
     },
   },
 });
