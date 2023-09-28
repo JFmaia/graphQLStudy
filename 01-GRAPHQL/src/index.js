@@ -3,18 +3,25 @@ import { ApolloServer, gql } from 'apollo-server';
 const server = new ApolloServer({
   typeDefs: gql`
     type Query {
-      hello: String
-      hi: String
+      id: ID
+      name: String
+      age: Int
+      heigth: Float
+      married: Boolean!
+      arrayString: [String!]!
     }
   `,
+  // o ! na frente do type não deixa ser null e ele tem que existir
   resolvers: {
     Query: {
-      hello: () => {
-        return 'Hello Again';
+      id: () => '131iswjd2321',
+      name: () => {
+        return 'José Maia';
       },
-      hi: () => {
-        return 'Hi';
-      },
+      age: () => 23,
+      heigth: () => 86.33,
+      married: () => false,
+      arrayString: () => ['Pikles', 'Repolho'],
     },
   },
 });
