@@ -1,26 +1,16 @@
+const users = async (_, __, { axios, urlBase }) => {
+  const users = await axios.get(`${urlBase}users`);
+  return users.data;
+};
+
+const user = async (_, __, { axios, urlBase }) => {
+  const user = await axios.get(`${urlBase}users/602`);
+  return user.data;
+};
+
 export const userResolvers = {
   Query: {
-    user: () => {
-      return {
-        id: '1',
-        userName: 'José Flávio',
-      };
-    },
-    users: () => {
-      return [
-        {
-          id: '1',
-          userName: 'José Flávio',
-        },
-        {
-          id: '2',
-          userName: 'Lavinia Kaylane',
-        },
-        {
-          id: '1',
-          userName: 'José Marcos',
-        },
-      ];
-    },
+    user,
+    users,
   },
 };
