@@ -5,6 +5,6 @@ const server = new ApolloServer({
   resolvers,
 });
 
-server.listen(4003).then(({ url }) => {
+server.listen(4004).then(({ url }) => {
   console.log(`Server listening on url ${url}`);
 });
