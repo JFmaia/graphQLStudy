@@ -1,15 +1,10 @@
 import { ApolloServer } from 'apollo-server';
 import { resolvers, typeDefs } from './graphql/schema';
-import axios from 'axios';
+import { context } from './graphql/context';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => {
-    return {
-      axios,
-      urlBase: 'http://localhost:3000/',
-    };
-  },
+  context,
 });
 
 server.listen(4004).then(({ url }) => {
