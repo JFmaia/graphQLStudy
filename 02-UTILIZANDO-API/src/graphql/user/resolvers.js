@@ -3,8 +3,8 @@ const users = async (_, __, { axios, urlBase }) => {
   return users.data;
 };
 
-const user = async (_, __, { axios, urlBase }) => {
-  const user = await axios.get(`${urlBase}users/602`);
+const user = async (_, { id }, { axios, urlBase }) => {
+  const user = await axios.get(`${urlBase}users/` + id);
   return user.data;
 };
 
