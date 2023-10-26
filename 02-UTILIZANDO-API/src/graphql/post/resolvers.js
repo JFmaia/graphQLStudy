@@ -13,4 +13,11 @@ export const postResolvers = {
     post,
     posts,
   },
+  // Criando um resolvers especifico atributo de post, ela será chamada para cada post
+  Post: {
+    unixTimestamp: ({ createdAt }) => {
+      const timestamp = new Date(createdAt).getTime() / 1000;
+      return Math.floor(timestamp);
+    },
+  },
 };
