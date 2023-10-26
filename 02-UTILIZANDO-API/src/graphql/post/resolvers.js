@@ -1,6 +1,15 @@
 const post = async (_, { id }, { axios, urlBase }) => {
-  const post = await axios.get(`${urlBase}posts/` + id);
-  return post.data;
+  const response = await axios.get(`${urlBase}posts/` + id);
+  const post = await response.data;
+
+  // Verificando se teve erro e dando statuscode e message
+  if (typeof post.id === 'undefined') {
+    return {
+      statusCode: 404,
+      message: 'Post not found!',
+    };
+  }
+  return post;
 };
 
 const posts = async (_, { input }, { axios, urlBase }) => {
@@ -20,6 +29,14 @@ export const postResolvers = {
     unixTimestamp: ({ createdAt }) => {
       const timestamp = new Date(createdAt).getTime() / 1000;
       return Math.floor(timestamp);
+    },
+  },
+  // Tratativa de error
+  PostResult: {
+    __resolveType: (obj) => {
+      if (typeof obj.statusCode !== 'undefined') return 'PostNotFoundError';
+      if (typeof obj.id !== 'undefined') return 'Post';
+      return null;
     },
   },
 };
