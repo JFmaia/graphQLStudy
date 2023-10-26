@@ -3,8 +3,10 @@ const post = async (_, { id }, { axios, urlBase }) => {
   return post.data;
 };
 
-const posts = async (_, __, { axios, urlBase }) => {
-  const posts = await axios.get(`${urlBase}posts`);
+const posts = async (_, { input }, { axios, urlBase }) => {
+  //adicionando filtros opcionais
+  const apiFiltersInput = new URLSearchParams(input);
+  const posts = await axios.get(`${urlBase}posts/?${apiFiltersInput}`);
   return posts.data;
 };
 

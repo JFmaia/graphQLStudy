@@ -1,5 +1,6 @@
-const users = async (_, __, { axios, urlBase }) => {
-  const users = await axios.get(`${urlBase}users`);
+const users = async (_, { input }, { axios, urlBase }) => {
+  const apiFiltersInput = new URLSearchParams(input);
+  const users = await axios.get(`${urlBase}users/?${apiFiltersInput}`);
   return users.data;
 };
 
